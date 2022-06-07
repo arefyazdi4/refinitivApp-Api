@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('corps/', views.CorpList.as_view()),
-    path('esgscore/<int:pk>/', views.EsgScoreDetail.as_view(), name='esg-score'),
+    path('esgscore/<ticker>/', views.EsgScoreDetail.as_view(), name='esg-score'),
 ]
