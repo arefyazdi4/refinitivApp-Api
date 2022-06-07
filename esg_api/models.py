@@ -7,6 +7,9 @@ class Corp(models.Model):
     ticker = models.CharField(max_length=255, unique=True)
     industry_type = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.title
+
 
 class ESGScore(models.Model):
     rank = models.IntegerField()
