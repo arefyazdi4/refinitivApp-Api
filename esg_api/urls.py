@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('corps/', views.corp_list),
-    path('esgscore/<str:pk>/', views.esg_score, name='esg-score'),
+    path('esgscore/<int:pk>/', views.esg_score, name='esg-score'),
 ]

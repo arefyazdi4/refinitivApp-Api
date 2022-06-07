@@ -7,6 +7,8 @@ class Corp(models.Model):
     ticker = models.CharField(max_length=255, unique=True)
     industry_type = models.TextField(blank=True)
 
+    objects = models.Manager()
+
     def __str__(self):
         return self.title
 
@@ -19,3 +21,5 @@ class ESGScore(models.Model):
     governance_pillar = models.IntegerField()
     social_pillar = models.IntegerField()
     corp = models.OneToOneField(Corp, on_delete=models.CASCADE, primary_key=True)
+
+    objects = models.Manager()
