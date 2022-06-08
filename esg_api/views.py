@@ -1,16 +1,17 @@
 from django.db.models import F
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
 from .models import Corp, ESGScore
 from .serializer import CorpSerializer, ESGScoreSerializer
-from .filters import CorpFilter, EsgScoreFilter
+from .filters import EsgScoreFilter
 
 
 class CorpViewSet(ModelViewSet):
     queryset = Corp.objects.select_related('esgscore').all()
     serializer_class = CorpSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = CorpFilter
+    filter_backends = [SearchFilter]
+    search_fields = ['title', 'industry_type']
 
     def get_serializer_context(self):
         return {'request': self.request}
