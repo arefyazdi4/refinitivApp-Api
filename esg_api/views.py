@@ -1,6 +1,6 @@
 from django.db.models import F
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 from .models import Corp, ESGScore
 from .serializer import CorpSerializer, ESGScoreSerializer
@@ -21,5 +21,6 @@ class EsgScoreViewSet(ModelViewSet):
     queryset = ESGScore.objects.annotate(ticker=F('corp__ticker'))
     serializer_class = ESGScoreSerializer
     lookup_field = 'ticker'
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = EsgScoreFilter
+    ordering_fields = ['esg_score', 'rank', 'environment_pillar', 'governance_pillar', 'social_pillar']
