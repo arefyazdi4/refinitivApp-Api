@@ -1,10 +1,10 @@
 from django.db.models import F
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.viewsets import ModelViewSet
 from .models import Corp, ESGScore
 from .serializer import CorpSerializer, ESGScoreSerializer
 
 
-class CorpList(ListCreateAPIView):
+class CorpViewSet(ModelViewSet):
     queryset = Corp.objects.select_related('esgscore').all()
     serializer_class = CorpSerializer
 
@@ -12,7 +12,7 @@ class CorpList(ListCreateAPIView):
         return {'request': self.request}
 
 
-class EsgScoreDetail(RetrieveUpdateDestroyAPIView):
+class EsgScoreViewSet(ModelViewSet):
     queryset = ESGScore.objects.annotate(ticker=F('corp__ticker'))
     serializer_class = ESGScoreSerializer
     lookup_field = 'ticker'
