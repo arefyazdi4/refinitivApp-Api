@@ -12,6 +12,9 @@ class Corp(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['title']
+
 
 class ESGScore(models.Model):
     rank = models.IntegerField()
@@ -23,3 +26,9 @@ class ESGScore(models.Model):
     corp = models.OneToOneField(Corp, on_delete=models.CASCADE, primary_key=True)
 
     objects = models.Manager()
+
+    def __str__(self):
+        return self.corp
+
+    class Meta:
+        ordering = ['esg_score', 'rank']
