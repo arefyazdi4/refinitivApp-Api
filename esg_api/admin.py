@@ -7,8 +7,10 @@ from . import models
 @admin.register(models.Corp)
 class CorpAdmin(admin.ModelAdmin):
     list_display = ['title', 'industry_type', 'esgscore_rank']
-    list_per_page = 20
     list_select_related = ['esgscore']
+    list_per_page = 20
+    ordering = ['title']
+    search_fields = ['title', 'industry_type__istartswith']
 
     @admin.display(ordering='rank')
     def esgscore_rank(self, corp):
