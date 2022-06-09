@@ -29,7 +29,10 @@ class ReliabilityFilter(admin.SimpleListFilter):
 
 @admin.register(models.Corp)
 class CorpAdmin(admin.ModelAdmin):
-    list_display = ['title', 'industry_type', 'esgscore_rank']
+    prepopulated_fields = {
+        'ticker': ['title']
+    }
+    list_display = ['title', 'ticker', 'esgscore_rank', 'industry_type']
     list_select_related = ['esgscore']
     list_per_page = 20
     ordering = ['title']
@@ -47,6 +50,7 @@ class CorpAdmin(admin.ModelAdmin):
 
 @admin.register(models.ESGScore)
 class ESGScoreAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['corp']
     actions = ['reset_esg_scores']
     list_display = ['corp', 'esg_score', 'rank', 'reliability',
                     'environment_pillar', 'governance_pillar', 'social_pillar']
