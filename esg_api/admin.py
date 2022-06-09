@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.html import format_html, urlencode
 from django.urls import reverse
 from . import models
@@ -47,6 +47,7 @@ class CorpAdmin(admin.ModelAdmin):
 
 @admin.register(models.ESGScore)
 class ESGScoreAdmin(admin.ModelAdmin):
+    actions = ['reset_esg_scores']
     list_display = ['corp', 'esg_score', 'rank', 'reliability',
                     'environment_pillar', 'governance_pillar', 'social_pillar']
     list_editable = ['rank']
@@ -64,3 +65,12 @@ class ESGScoreAdmin(admin.ModelAdmin):
             return 'good performance'
         elif score <= 100:
             return 'excellent performance'
+
+    @admin.action(description='Reset ESG Scores')
+    def reset_esg_scores(self, request, queryset):
+        updated_scores = queryset.update(esg_score=0)
+        self.message_user(
+            request,
+            f'{updated_scores} ESG Scores were successfully updated',
+            messages.WARNING
+        )
