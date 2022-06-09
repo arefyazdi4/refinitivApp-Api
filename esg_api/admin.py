@@ -4,6 +4,29 @@ from django.urls import reverse
 from . import models
 
 
+class ReliabilityFilter(admin.SimpleListFilter):
+    title = 'Reliability'
+    parameter_name = 'reliability'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('<25', 'poor'),
+            ('<50', 'satisfactory'),
+            ('<75', 'good'),
+            ('<100', 'excellent')
+        ]
+
+    def queryset(self, request, queryset):
+        if self.value() == '<25':
+            return queryset.filter(rank__lt=25)
+        elif self.value() == '<50':
+            return queryset.filter(rank__lt=50)
+        elif self.value() == '<75':
+            return queryset.filter(rank__lt=75)
+        elif self.value() == '<100':
+            return queryset.filter(rank__lte=100)
+
+
 @admin.register(models.Corp)
 class CorpAdmin(admin.ModelAdmin):
     list_display = ['title', 'industry_type', 'esgscore_rank']
@@ -24,8 +47,10 @@ class CorpAdmin(admin.ModelAdmin):
 
 @admin.register(models.ESGScore)
 class ESGScoreAdmin(admin.ModelAdmin):
-    list_display = ['corp', 'esg_score', 'rank', 'reliability']
+    list_display = ['corp', 'esg_score', 'rank', 'reliability',
+                    'environment_pillar', 'governance_pillar', 'social_pillar']
     list_editable = ['rank']
+    list_filter = [ReliabilityFilter]
     list_per_page = 20
 
     @admin.display(ordering='esg_score')
