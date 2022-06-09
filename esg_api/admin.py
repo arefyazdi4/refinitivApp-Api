@@ -27,6 +27,10 @@ class ReliabilityFilter(admin.SimpleListFilter):
             return queryset.filter(rank__lte=100)
 
 
+class ESGScoreInline(admin.TabularInline):
+    model = models.ESGScore
+
+
 @admin.register(models.Corp)
 class CorpAdmin(admin.ModelAdmin):
     prepopulated_fields = {
@@ -35,6 +39,7 @@ class CorpAdmin(admin.ModelAdmin):
     list_display = ['title', 'ticker', 'esgscore_rank', 'industry_type']
     list_select_related = ['esgscore']
     list_per_page = 20
+    inlines = [ESGScoreInline]
     ordering = ['title']
     search_fields = ['title', 'industry_type__istartswith']
 
