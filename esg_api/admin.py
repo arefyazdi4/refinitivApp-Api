@@ -4,9 +4,12 @@ from . import models
 
 @admin.register(models.Corp)
 class CorpAdmin(admin.ModelAdmin):
-    list_display = ['title', 'industry_type']
+    list_display = ['title', 'industry_type', 'esgscore_rank']
     list_per_page = 20
+    list_select_related = ['esgscore']
 
+    def esgscore_rank(self, corp):
+        return corp.esgscore.rank
 
 @admin.register(models.ESGScore)
 class ESGScoreAdmin(admin.ModelAdmin):
