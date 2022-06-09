@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html, urlencode
+from django.urls import reverse
 from . import models
 
 
@@ -8,8 +10,15 @@ class CorpAdmin(admin.ModelAdmin):
     list_per_page = 20
     list_select_related = ['esgscore']
 
+    @admin.display(ordering='rank')
     def esgscore_rank(self, corp):
-        return corp.esgscore.rank
+        url = (
+                reverse('admin:esg_api_esgscore_changelist')
+                + '?'
+                + urlencode({'corp__id': str(corp.id)})
+        )
+        return format_html(f'<a herf="{url}">{corp.esgscore.rank}</a>')
+
 
 @admin.register(models.ESGScore)
 class ESGScoreAdmin(admin.ModelAdmin):
