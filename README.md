@@ -16,7 +16,8 @@ Tech stacks of this project:
 * Django 3.2  
 * djangorestframework 3.1   
 * django-filter 21.1
-      
+* djoser 2.1.0
+* djangorestframework_simplejwt 4.8      
       
      
 ## app is not dockerized yet

@@ -21,5 +21,7 @@ admin.AdminSite.site_title = 'Admin Panel'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('esg_api.urls'))
+    path('api/', include('esg_api.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
 ]
