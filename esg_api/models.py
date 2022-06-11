@@ -32,3 +32,6 @@ class ESGScore(models.Model):
 
     class Meta:
         ordering = ['esg_score', 'rank']
+        permissions = [
+            ('rest_scores', 'Can reset all Scores')
+        ]
