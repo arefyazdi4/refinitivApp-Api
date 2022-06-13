@@ -132,18 +132,16 @@ REST_FRAMEWORK = {
     ),
 }
 
+from datetime import timedelta
+
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
 }
 
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'core.serializers.UserCreateSerializer'
+        'user_create': 'core.serializers.UserCreateSerializer',
+        'current_user': 'core.serializers.UserSerializer'
     }
-}
-
-from datetime import timedelta
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5)
 }
