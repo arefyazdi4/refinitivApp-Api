@@ -21,5 +21,3 @@ class CorpSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'ticker', 'industry_type', 'esgscore']
 
     esgscore = ESGScoreSerializer()
-
-
