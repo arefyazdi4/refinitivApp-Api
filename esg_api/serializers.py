@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Corp, ESGScore
+from .models import Corp, ESGScore, Customer
 
 
 class ESGScoreSerializer(serializers.ModelSerializer):
@@ -21,3 +21,11 @@ class CorpSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'ticker', 'industry_type', 'esgscore']
 
     esgscore = ESGScoreSerializer()
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = Customer
+        fields = ['id', 'user_id', 'phone', 'birth_date', 'membership']
