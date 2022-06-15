@@ -1,6 +1,6 @@
 from django.db.models import F
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, DjangoModelPermissions
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
@@ -8,7 +8,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from .models import Corp, ESGScore, Customer
 from .serializers import CorpSerializer, ESGScoreSerializer, CustomerSerializer
 from .filters import EsgScoreFilter
-from .permissions import ISAdminOrReadOnly
+from .permissions import ISAdminOrReadOnly, FullDjangoModelPermissions
 
 
 class CorpViewSet(ModelViewSet):
@@ -35,7 +35,7 @@ class EsgScoreViewSet(ModelViewSet):
 class CustomerViewSet(ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [FullDjangoModelPermissions]
 
     @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
     def me(self, request):
