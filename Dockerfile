@@ -1,5 +1,8 @@
 FROM python:3.9-alpine
 ENV PYTHONUNBUFFERED=1
+
+RUN addgroup app && adduser -S -G app app
+USER app
 RUN apk update && apk add python3-dev
 
 WORKDIR /app
