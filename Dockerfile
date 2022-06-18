@@ -1,6 +1,6 @@
 FROM python:3.9-alpine
 ENV PYTHONUNBUFFERED=1
-RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+RUN apk update && apk add python3-dev
 
 WORKDIR /app
 COPY . .
