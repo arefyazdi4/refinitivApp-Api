@@ -1,4 +1,4 @@
-from .models import Customer
+from esg_api.models import Customer
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.conf import settings

@@ -6,4 +6,4 @@ class EsgApiConfig(AppConfig):
     name = 'esg_api'
 
     def ready(self):
-        import esg_api.signals
+        import esg_api.signals.handlers
