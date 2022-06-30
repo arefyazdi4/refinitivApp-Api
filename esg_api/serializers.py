@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Corp, ESGScore, Customer
-from .signals import corp_created
 
 
 class ESGScoreSerializer(serializers.ModelSerializer):
@@ -22,9 +21,6 @@ class CorpSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'ticker', 'industry_type', 'esgscore']
 
     esgscore = ESGScoreSerializer()
-
-    def save(self, **kwargs):
-        corp_created.send_robust(self.__class__)
 
 
 class CustomerSerializer(serializers.ModelSerializer):
