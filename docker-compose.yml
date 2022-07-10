@@ -2,11 +2,32 @@ version: "3.8"
 
 services:
   backend:
-    container_name: refinitive_app
+    container_name: refinitivApp
     build: .
     ports:
       - 8000:8000
     volumes:
       - .:/app
+    depends_on:
+      - redis
     restart: on-failure
     command: python manage.py runserver 0.0.0.0:8000
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 7379:6379
+    restart: always
+    volumes:
+      - redisdata:/data
+
+  celery:
+    build: .
+    command: celery -A refinitivApp worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+
+volumes:
+  redisdata:
