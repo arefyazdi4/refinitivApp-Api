@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   backend:
+    container_name: refinitive_app
     build: .
     ports:
       - 8000:8000
