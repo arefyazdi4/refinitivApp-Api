@@ -9,23 +9,12 @@ services:
     - .:/app
     depends_on:
       - redis
-      - mysql
     restart: on-failure
     command: python manage.py runserver 0.0.0.0:8000
-    networks:
-      - djangonetwork
-
-  networks:
-    djangonetwork:
 
   redis:
     image: redis:alpine
-    container_name: redis
+    container_name: redis_django
     ports:
       - 6379:6379
     restart: always
-    volumes:
-      - redisdata:/data
-
-  volumes:
-    redisdata:
