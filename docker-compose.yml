@@ -4,17 +4,8 @@ services:
   backend:
     build: .
     ports:
-    - 8000:8000
+      - 8000:8000
     volumes:
-    - .:/app
-    depends_on:
-      - redis
+      - .:/app
     restart: on-failure
     command: python manage.py runserver 0.0.0.0:8000
-
-  redis:
-    image: redis:alpine
-    container_name: redis_django
-    ports:
-      - 6379:6379
-    restart: always
