@@ -25,7 +25,7 @@ Tech stacks of this project:
       
 
 ### 4.  Setting up the project:
-* `docker exec -it refinitive_app sh`
+* `docker exec -it refinitivApp sh`
 * `python manage.py migrate `  
 * `python manage.py seed_db   `
 * `python manage.py createsuperuser   `
