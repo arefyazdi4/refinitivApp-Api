@@ -5,3 +5,4 @@ djoser==2.1.0
 djangorestframework_simplejwt==4.8.0
 redis==4.3.4
 celery==5.2.7
+flower==1.1.0
