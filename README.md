@@ -4,6 +4,10 @@ an API to represent fetched ESG scores to clients
 Tech stacks of this project:
 * Django / Djago Rest Framework
 * Docker
+* redis
+* celery 
+* JWT
+* Pytest as a test tool
 
 
 ### 1.  Download the project:
@@ -19,14 +23,15 @@ Tech stacks of this project:
 * djoser 2.1.0
 * djangorestframework_simplejwt 4.8      
       
-     
-## app is not dockerized yet
-### 3.  Running the project:
+
+### 4.  Setting up the project:
+* `docker exec -it refinitive_app sh`
 * `python manage.py migrate `  
 * `python manage.py seed_db   `
 * `python manage.py createsuperuser   `
-* `python manage.py runserver  `
 
-## 4.  Now you can see Browsable Api
+
+## 5.  Now you can see Browsable Api
 * Api to see the companies List and Detail -> `127.0.0.1:8000/api/`
 * Admin Panel -> `127.0.0.1:8000/admin/`
+* Api to JWT authentication -> `127.0.0.1:8000/auth/jwt/create/`
