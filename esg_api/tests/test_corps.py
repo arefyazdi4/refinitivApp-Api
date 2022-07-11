@@ -1,7 +1,9 @@
 from rest_framework.test import APIClient
 from rest_framework import status
+import pytest
 
 
+@pytest.mark.django_db
 class TestCreateCorp:
     def test_if_use_anonymous_return_401(self):
         client = APIClient()
