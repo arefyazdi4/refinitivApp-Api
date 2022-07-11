@@ -6,3 +6,5 @@ djangorestframework_simplejwt==4.8.0
 redis==4.3.4
 celery==5.2.7
 flower==1.1.0
+pytest==7.1.2
+pytest-django==4.5.2
