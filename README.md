@@ -15,13 +15,13 @@ Tech stacks of this project:
 * `git clone "https://github.com/arefyazdi4/refinitivApp-Api"`
 
 
-### 2. Install Dependencies : 
-* python 3.9  
-* Django 3.2  
-* djangorestframework 3.1   
-* django-filter 21.1
-* djoser 2.1.0
-* djangorestframework_simplejwt 4.8      
+### 2.  Build The Project:
+
+* `docker-compose build`
+
+### 3.  Running the project:
+
+* `docker-compose up ` \ `docker-compose up -d`
       
 
 ### 4.  Setting up the project:
